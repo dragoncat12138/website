@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.4/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.4/css/bootstrap.min.css" />
+		<style>
+			body
+			{
+				width: 100%;
+			}
+			*
+			{
+				margin: 0px;
+				padding: 0px;
+			}
+			.detail_show
+			{
+				height: 1000px; /*可以在这里改变这个盒子的高度以及外边距，但这是我非常不满意的地方*/
+				width: 100%;
+			}
+			.bg {
+				background: url('img/4.jpg') no-repeat;
+				height: 100%;
+				width:100% ;
+				background-size: 100% 100%;
+				transition: background-image 0.3s ease-in-out; /*最关键的动画，用来替代原本代码的fadein和fadeout*/
+			}
+			
+			#wrap {
+				overflow: hidden;
+				float:left; /*让盒子的右边也可以放置元素，这个是我觉得原本代码最不合理的地方*/
+				width: 1000px;
+				height: 400px;
+			}
+			
+			#wrap>ul {
+				width: 120%;
+				list-style: none;
+			}
+			
+			#wrap>ul>li {
+				float: left;
+				width: 100px;
+				height: 400px;
+				cursor: pointer;
+			}
+			
+			#wrap>ul>li:nth-child(1) {
+				background: url('img/1.jpg') no-repeat center/cover;/*改变图片在这里改，把路径换一下就好*/
+			}
+			
+			#wrap>ul>li:nth-child(2) {
+				background: url('img/2.jpg') no-repeat center/cover;
+			}
+			
+			#wrap>ul>li:nth-child(3) {
+				background: url('img/3.jpg') no-repeat center/cover;
+			}
+			
+			#wrap>ul>li:nth-child(4) {
+				background: url('img/4.jpg') no-repeat center/cover;
+				width: 700px;
+			}
+			
+			#wrap>ul>li>.text {
+				width: 100px;
+				height: 100%;
+				background: #000;
+				opacity: .5;
+			}
+			
+			#wrap>ul>li>.text p {
+				padding: 20px 40px;
+				font-family: 'Microsoft yahei';
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="detail_show">
+			<div class="bg">
+				<div id="wrap">
+					<ul>
+						<li>
+							<div class="text">
+								<p>尼尔机械纪元</p>
+							</div>
+						</li>
+						<li>
+							<div class="text">
+								<p>尼尔机械纪元2</p>
+							</div>
+						</li>
+						<li>
+							<div class="text">
+								<p>尼尔机械纪元3</p>
+							</div>
+						</li>
+						<li class="curr">
+							<div class="text">
+								<p>尼尔机械纪元4</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="bootstrap-3.3.4/js/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.4/js/bootstrap.min.js"></script>
+		<script>
+			$('#wrap li').mouseover(function() {
+			if(!$(this).hasClass('curr')) {
+				$('#wrap li').removeClass('curr');
+				$(this).addClass('curr');
+				// 切换背景
+				$('#wrap li').each(function(index) {
+					if($(this).hasClass('curr')) {
+						$('.bg').css("background-image",$(this).css("background-image")) ;//当mouserover的时候，把背景图换成盒子里面的图，因为
+						//有transition的原因，不需要用上fadein和fadeout
+					}
+				});
+		
+				$('#wrap li').not('.curr').stop().animate({
+					width: 100
+				}, 500, 'linear');
+				366
+				$('.curr').stop().animate({
+					width: 700
+				}, 500, 'linear');
+			}
+		});
+		</script>
+	</body>
+
+</html>
